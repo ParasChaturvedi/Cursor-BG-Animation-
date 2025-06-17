@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liquid Gradient Background</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: sans-serif;
+      background: #000;
+      color: white;
+    }
+
+    section {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 500px;
+    }
+
+    .bg-glow {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #c084fc, #6b21a8, transparent 70%);
+      filter: blur(100px);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      transition: all 0.1s ease-out;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <div class="bg-glow" id="glow"></div>
+    <div class="content">
+      <h1>Expertises</h1>
+      <p>
+        Our highly qualified and certified experts ensure the highest security standards to meet all your specific needs.
+        <br/><br/>
+        Join our team for concrete and varied missions with high added value.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    const glow = document.getElementById('glow');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth * 100;
+      const y = e.clientY / window.innerHeight * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, #c084fc, #6b21a8, transparent 70%)`;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const x = touch.clientX / window.innerWidth * 100;
+      const y = touch.clientY / window.innerHeight * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, #c084fc, #6b21a8, transparent 70%)`;
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY / document.body.scrollHeight;
+      const newY = 30 + scrollY * 100;
+      glow.style.transform = `translateY(${scrollY * 100}px)`;
+    });
+  </script>
+
+</body>
+</html>
